@@ -59,7 +59,7 @@ const getRandomLikes = () => getRandomPositiveInt(15, 200);
 const getRandomDescription = () => descriptions[getRandomPositiveInt(0, descriptions.length -1)];
 
 const getRandomComment = () => ({
-  id: Math.floor(Math.random() * 10000 + Date.now() * Math.random()),
+  id: Math.floor(Math.random() * 10000 + Date.now() * Math.random()), //magic number
   avatar: `img/avatar-${getRandomPositiveInt(1, 6)}.svg`,
   message: commentMessages[getRandomPositiveInt(0, commentMessages.length - 1)],
   name: names[getRandomPositiveInt(0, names.length - 1)]
