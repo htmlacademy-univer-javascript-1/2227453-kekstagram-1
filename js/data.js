@@ -61,10 +61,6 @@ const getPost = (id) => ({
   comments: Array.from({length: getRandomPositiveInt(1, 4)}, getRandomComment)
 });
 
-export const generatePosts = () => {
-  const posts = [];
-  for (let i = 1; i <=NUM_POSTS; i++) {
-    posts.push(getPost(i));
-  }
-  return posts;
-};
+export const generatePosts = () => Array.from({ length: NUM_POSTS }, (_, i) => getPost(i));
+
+
