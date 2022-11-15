@@ -1,3 +1,5 @@
+import { viewFullSize } from './bigRendering';
+
 export const renderingPosts = (data) => {
   const tempPost = document.querySelector('#picture')
     .content
@@ -12,6 +14,7 @@ export const renderingPosts = (data) => {
     photoInfo.querySelector('.picture__comments').textContent = comments.length;
     photoInfo.querySelector('.picture__likes').textContent = likes;
     photoList.appendChild(post);
+    post.addEventListener('click', viewFullSize(post));
   });
 
   document.querySelector('.pictures').appendChild(photoList);
