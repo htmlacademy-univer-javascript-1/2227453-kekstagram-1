@@ -9,6 +9,7 @@ const onCloseButtonClick = () => {
   body.classList.remove('modal-open');
   commentsCount.classList.remove('hidden');
   commentsLoader.classList.remove('hidden');
+  // eslint-disable-next-line no-use-before-define
   document.removeEventListener('keydown', onEscKeydownClick);
 };
 
