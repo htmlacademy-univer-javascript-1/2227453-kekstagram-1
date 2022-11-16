@@ -1,4 +1,4 @@
-import { viewFullSize } from './bigRendering';
+import { showFullSizePost } from './bigRendering.js';
 
 export const renderingPosts = (data) => {
   const tempPost = document.querySelector('#picture')
@@ -7,14 +7,18 @@ export const renderingPosts = (data) => {
 
   const photoList = document.createDocumentFragment();
 
-  data.forEach(({url, likes, comments}) => {
-    const post = tempPost.cloneNode(true);
-    post.querySelector('.picture__img').src = url;
-    const photoInfo = post.querySelector('.picture__info');
+  data.forEach((post) => {
+    const {url, likes, comments} = post;
+    const postElement = tempPost.cloneNode(true);
+    postElement.querySelector('.picture__img').src = url;
+    const photoInfo = postElement.querySelector('.picture__info');
     photoInfo.querySelector('.picture__comments').textContent = comments.length;
     photoInfo.querySelector('.picture__likes').textContent = likes;
-    photoList.appendChild(post);
-    post.addEventListener('click', viewFullSize(post));
+    postElement.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      showFullSizePost(post);
+    });
+    photoList.appendChild(postElement);
   });
 
   document.querySelector('.pictures').appendChild(photoList);
