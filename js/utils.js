@@ -9,6 +9,5 @@ export const getRandomPositiveInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-// eslint-disable-next-line no-unused-vars
-const checkLength = (str, maxLen) =>  str.length <= maxLen;
+export const checkLength = (str, maxLen) =>  str.length <= maxLen;
 
