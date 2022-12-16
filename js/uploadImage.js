@@ -35,9 +35,6 @@ uploadFile.addEventListener('change', () => {
   });
 });
 
-// eslint-disable-next-line no-console
-console.log('tut');
-
 form.addEventListener('submit', (evt) => {
   if (!validateForm()) {
     evt.preventDefault();
