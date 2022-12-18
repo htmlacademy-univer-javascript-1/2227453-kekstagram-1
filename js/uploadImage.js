@@ -1,4 +1,6 @@
 import {form, hashtagForm, comment, validateForm} from './uploadImageValidation.js';
+import {setDefaultScaleValue} from './imageScale.js';
+import './imageEffects.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -25,11 +27,12 @@ const onEscKeydownClick = (evt) => {
 
 cancelButton.addEventListener('click', () => {
   closeWindow();
-}, {once: true});
+});
 
 uploadFile.addEventListener('change', () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
+  setDefaultScaleValue();
   document.addEventListener('keydown', (evt) => {
     onEscKeydownClick(evt);
   });
