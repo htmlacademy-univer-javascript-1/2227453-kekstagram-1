@@ -1,3 +1,5 @@
+import {isEscapeKey} from './utils.js';
+
 const DEFOULT_NEW_COMMMENTS_COUNT = 5;
 
 const body = document.querySelector('body');
@@ -21,7 +23,7 @@ const onCloseButtonClick = () => {
 };
 
 const onEscKeydownClick = (evt) => {
-  if (evt.key === 'Escape') {
+  if (isEscapeKey(evt.key)) {
     evt.preventDefault();
     onCloseButtonClick();
   }
