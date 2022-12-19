@@ -1,3 +1,5 @@
+import { isEscapeKey } from './utils.js';
+
 const errorTemplate = document.querySelector('#error').content.querySelector('section');
 const successTemplate = document.querySelector('#success').content.querySelector('section');
 
@@ -24,7 +26,7 @@ const closeMessage = () => {
 };
 
 const onEscKeydownClick = (evt) => {
-  if (evt.key === 'Escape') {
+  if (isEscapeKey(evt.key)) {
     evt.preventDefault();
     closeMessage();
   }

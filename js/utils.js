@@ -1,6 +1,5 @@
 export const getRandomPositiveInt = (min, max) => {
   if (min < 0 || max <= min) {
-    //return -1
     throw new Error('IllegalArgumentExeption');
   }
   //Sourse: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -34,13 +33,4 @@ export const debounce = (callback, timeoutDelay = 500) => {
   timeoutId = setTimeout(callback, timeoutDelay);
 };
 
-export const throttle = (callback, delayBetweenFrames) => {
-  let lastTime = 0;
-  return (...rest) => {
-    const now = new Date();
-    if (now - lastTime >= delayBetweenFrames) {
-      callback.apply(this, rest);
-      lastTime = now;
-    }
-  };
-};
+export const isEscapeKey = (keycode) => keycode === 'Escape';

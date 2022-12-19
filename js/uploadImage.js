@@ -3,6 +3,7 @@ import {setDefaultScaleValue} from './imageScale.js';
 import {setDefaultEffect} from './imageEffects.js';
 import {sendData} from './api.js';
 import { uploadFile } from './uploadFile.js';
+import { isEscapeKey } from './utils.js';
 
 const uploadFileElement = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -19,7 +20,7 @@ const closeWindow = () => {
 };
 
 const onEscKeydownClick = (evt) => {
-  if (evt.code === 'Escape' &&
+  if (isEscapeKey(evt.key) &&
     !(evt.target.matches('input')) &&
     !(evt.target.matches('textarea'))) {
 
