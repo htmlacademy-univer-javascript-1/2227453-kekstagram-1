@@ -130,7 +130,7 @@ imageForm.addEventListener('change', (evt) =>{
   const effect = evt.target.value;
   setEffect(effect);
   if (effect === 'none') {
-    imagePreview.style. filter = 'none';
+    imagePreview.style.filter = 'none';
     slider.classList.add('hidden');
     return;
   }
@@ -139,4 +139,9 @@ imageForm.addEventListener('change', (evt) =>{
   slider.noUiSlider.updateOptions(effectOptions.sliderOptions);
   slider.classList.remove('hidden');
 });
+
+export const setDefaultEffect = () => {
+  imagePreview.style.filter = 'none';
+  slider.classList.add('hidden');
+};
 

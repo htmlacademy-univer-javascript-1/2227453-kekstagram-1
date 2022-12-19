@@ -56,10 +56,10 @@ const showComments = (comments, count) => {
 };
 
 export const showFullSizePost = (post) => {
-  const {url, likes, descriptions, comments} = post;
+  const {url, likes, description, comments} = post;
   document.querySelector('.big-picture__img').querySelector('img').src = url;
   document.querySelector('.likes-count').textContent = likes;
-  document.querySelector('.social__caption').textContent = descriptions;
+  document.querySelector('.social__caption').textContent = description;
   commentsCount.textContent = comments.length;
   body.classList.add('modal-open');
   bigPictureClass.classList.remove('hidden');
