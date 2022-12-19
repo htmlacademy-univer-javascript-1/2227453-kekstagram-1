@@ -16,7 +16,7 @@ document.body.append(successBlock);
 
 let actionsAfterClose = [];
 
-const onButtonsClick = () => {
+const closeMessage = () => {
   errorBlock.classList.add('hidden');
   successBlock.classList.add('hidden');
   actionsAfterClose.forEach((action) => action());
@@ -26,10 +26,15 @@ const onButtonsClick = () => {
 const onEscKeydownClick = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    onButtonsClick();
+    closeMessage();
   }
 };
 
+const closeMessageWithClick = (evt) => {
+  if (!evt.target.matches('h2') && !evt.target.matches('button[type="button"]')) {
+    closeMessage();
+  }
+};
 
 export const getErrorMessage = (message) => {
   errorBlock.classList.remove('hidden');
@@ -40,10 +45,16 @@ export const getErrorMessage = (message) => {
       document.removeEventListener('keydown', onEscKeydownClick);
     }
   );
-  errorButton.addEventListener('click', onButtonsClick);
+  errorButton.addEventListener('click', closeMessage);
   actionsAfterClose.push(
     () => {
-      errorButton.removeEventListener('click', onButtonsClick);
+      errorButton.removeEventListener('click', closeMessage);
+    }
+  );
+  document.addEventListener('click', closeMessageWithClick);
+  actionsAfterClose.push(
+    () => {
+      document.removeEventListener('click', closeMessageWithClick);
     }
   );
 };
@@ -56,10 +67,16 @@ export const getSuccessMessage = () => {
       document.removeEventListener('keydown', onEscKeydownClick);
     }
   );
-  successButton.addEventListener('click', onButtonsClick);
+  successButton.addEventListener('click', closeMessage);
   actionsAfterClose.push(
     () => {
-      successButton.removeEventListener('click', onButtonsClick);
+      successButton.removeEventListener('click', closeMessage);
+    }
+  );
+  document.addEventListener('click', closeMessageWithClick);
+  actionsAfterClose.push(
+    () => {
+      document.removeEventListener('click', closeMessageWithClick);
     }
   );
 };
