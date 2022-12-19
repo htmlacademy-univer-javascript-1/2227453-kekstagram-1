@@ -1,6 +1,11 @@
 import { showFullSizePost } from './bigRendering.js';
+import { renderingFilter } from './imageFilters.js';
 
-export const renderingPosts = (data) => {
+const pictures = document.querySelector('.pictures');
+
+const renderingPosts = (data) => {
+  pictures.querySelectorAll('.picture').forEach((picture) => pictures.removeChild(picture));
+
   const tempPost = document.querySelector('#picture')
     .content
     .querySelector('.picture');
@@ -22,4 +27,9 @@ export const renderingPosts = (data) => {
   });
 
   document.querySelector('.pictures').appendChild(photoList);
+};
+
+export const render = (posts) => {
+  renderingPosts(posts);
+  renderingFilter(posts, renderingPosts);
 };
