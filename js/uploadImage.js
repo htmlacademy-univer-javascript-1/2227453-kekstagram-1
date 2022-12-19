@@ -2,16 +2,18 @@ import {form, hashtagForm, comment, validateForm} from './uploadImageValidation.
 import {setDefaultScaleValue} from './imageScale.js';
 import {setDefaultEffect} from './imageEffects.js';
 import {sendData} from './api.js';
+import { uploadFile } from './uploadFile.js';
 
-const uploadFile = document.querySelector('#upload-file');
+const uploadFileElement = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
+const submitButton = form.querySelector('.img-upload__submit');
 
 const closeWindow = () => {
   imgUploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  uploadFile.value = '';
+  uploadFileElement.value = '';
   hashtagForm.value = '';
   comment.value = '';
 };
@@ -26,15 +28,26 @@ const onEscKeydownClick = (evt) => {
   }
 };
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикую...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
 cancelButton.addEventListener('click', () => {
   closeWindow();
 });
 
-uploadFile.addEventListener('change', () => {
+uploadFileElement.addEventListener('change', () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   setDefaultScaleValue();
   setDefaultEffect();
+  uploadFile(uploadFileElement.files[0]);
   document.addEventListener('keydown', (evt) => {
     onEscKeydownClick(evt);
   });
@@ -43,7 +56,12 @@ uploadFile.addEventListener('change', () => {
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
   if (validateForm()) {
-    sendData(new FormData(evt.target));
-    closeWindow();
+    blockSubmitButton();
+    sendData(
+      () => {
+        unblockSubmitButton();
+        closeWindow();
+      },
+      new FormData(evt.target));
   }
 });

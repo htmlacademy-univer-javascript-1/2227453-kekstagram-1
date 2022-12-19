@@ -27,12 +27,11 @@ export const shuffle = (array) => {
   return array;
 };
 
-export const debounce  = (callback, timeoutDelay = 500) => {
-  let timeoutId;
-  return (...rest) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-  };
+let timeoutId;
+
+export const debounce = (callback, timeoutDelay = 500) => {
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(callback, timeoutDelay);
 };
 
 export const throttle = (callback, delayBetweenFrames) => {

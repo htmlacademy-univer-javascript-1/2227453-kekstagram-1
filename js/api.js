@@ -18,7 +18,7 @@ export const getData = (renderData) => {
 };
 
 
-export const sendData = (formData) => {
+export const sendData = (finallyAction, formData) => {
   fetch(SERVER_UPLOAD_URL,
     {
       method: 'POST',
@@ -31,5 +31,8 @@ export const sendData = (formData) => {
         getSuccessMessage();
       }
     })
-    .catch(() => getErrorMessage(ERROR_UPLOAD_MESSAGE));
+    .catch(() => {
+      getErrorMessage(ERROR_UPLOAD_MESSAGE);
+    })
+    .finally(() => finallyAction());
 };
