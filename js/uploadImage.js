@@ -1,6 +1,7 @@
 import {form, hashtagForm, comment, validateForm} from './uploadImageValidation.js';
 import {setDefaultScaleValue} from './imageScale.js';
-import './imageEffects.js';
+import {setDefaultEffect} from './imageEffects.js';
+import {sendData} from './api.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -33,13 +34,16 @@ uploadFile.addEventListener('change', () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   setDefaultScaleValue();
+  setDefaultEffect();
   document.addEventListener('keydown', (evt) => {
     onEscKeydownClick(evt);
   });
 });
 
 form.addEventListener('submit', (evt) => {
-  if (!validateForm()) {
-    evt.preventDefault();
+  evt.preventDefault();
+  if (validateForm()) {
+    sendData(new FormData(evt.target));
+    closeWindow();
   }
 });

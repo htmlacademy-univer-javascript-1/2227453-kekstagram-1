@@ -1,5 +1,5 @@
 import { renderingPosts } from  './rendering.js';
-import { generatePosts } from './data.js';
 import './uploadImage.js';
+import { getData } from './api.js';
 
-renderingPosts(generatePosts());
+getData(renderingPosts);
